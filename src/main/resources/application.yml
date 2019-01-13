@@ -1,0 +1,23 @@
+# Spring properties
+spring:
+  application:
+    name: persistence-service  # Identify this application
+  data:
+    mongodb:
+      database: forum_db  # Database name
+      host: localhost
+      port: 27017
+  main:
+    allow-bean-definition-overriding: true
+
+# HTTP Server
+server.port: 8086   # HTTP (Tomcat) port
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+
+management.endpoints.web.exposure.include: '*'

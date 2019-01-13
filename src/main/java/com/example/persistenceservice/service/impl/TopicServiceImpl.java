@@ -21,7 +21,7 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public List<Topic> findAll() {
-        return repository.findAll();
+        return repository.findAllByOrderByTopicDateDesc();
     }
 
     @Override

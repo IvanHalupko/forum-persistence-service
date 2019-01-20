@@ -8,7 +8,8 @@ import java.util.Optional;
 
 public interface TopicService {
 
-    List<Topic> findAll();
+    List<Topic> findAll(int page);
+    Long getTopicCount();
     Optional<Topic> findTopicById(String id);
     String saveTopic(Topic topic);
     void deleteTopicById(String id);

@@ -2,6 +2,7 @@ package com.example.persistenceservice.controller;
 
 import com.example.persistenceservice.model.Answer;
 import com.example.persistenceservice.model.Topic;
+import com.example.persistenceservice.model.TopicCountWrapper;
 import com.example.persistenceservice.service.TopicService;
 import com.sun.jersey.api.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +21,7 @@ import java.util.Optional;
 @RestController
 public class PersistenceController {
 
+    public static final int LIMIT = 5;
     private final TopicService topicService;
 
     @Autowired
@@ -28,15 +29,20 @@ public class PersistenceController {
         this.topicService = topicService;
     }
 
-    @GetMapping("/topic")
-    public List<Topic> getTopics() {
-        return topicService.findAll();
+    @GetMapping("/topics/{page}")
+    public List<Topic> getTopics(@PathVariable Integer page) {
+        return topicService.findAll(page);
     }
 
     @GetMapping("/topic/{topicId}")
     public Topic getTopicById(@PathVariable("topicId") String topicId) {
         return topicService.findTopicById(topicId)
                 .orElseThrow(NotFoundException::new);
+    }
+
+    @GetMapping("/topic-count")
+    public TopicCountWrapper getTopicCount() {
+        return new TopicCountWrapper().withTopicCount(topicService.getTopicCount());
     }
 
     @PostMapping("/topic")

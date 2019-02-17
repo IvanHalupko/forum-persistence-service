@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface TopicService {
 
     List<Topic> findAll(int page);
+    List<Topic> findAll();
     Long getTopicCount();
     Optional<Topic> findTopicById(String id);
     String saveTopic(Topic topic);

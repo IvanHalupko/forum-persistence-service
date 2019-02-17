@@ -34,6 +34,11 @@ public class PersistenceController {
         return topicService.findAll(page);
     }
 
+    @GetMapping("/topics")
+    public List<Topic> getTopics() {
+        return topicService.findAll();
+    }
+
     @GetMapping("/topic/{topicId}")
     public Topic getTopicById(@PathVariable("topicId") String topicId) {
         return topicService.findTopicById(topicId)
